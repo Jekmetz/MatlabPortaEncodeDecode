@@ -1,7 +1,8 @@
-function charArray = crypt(word,key)
-%%This function takes a word and a key and encrypts or decrypts them. Since
+function charArray = crypt(word,key,space)
+%%This function takes a word, a key, and a boolean and encrypts or decrypts them. Since
 %%the porta cipher uses the exact same method to encode and decode, the
 %%command can be run on the encrypted word with the same key to decrypt it.
+%%If you want to separate the thing into spaces, put 1, if not put 0.
 
     %Initialize the independant variables
     cipher = ['nopqrstuvwxyzabcdefghijklm';...
@@ -33,27 +34,26 @@ function charArray = crypt(word,key)
     cipherKey = ceil(keyToNum/2);
     
     %%lets convert some Strings!
-    charArrayNumVector = [''];
-    for i = 1:length(wordToNum)
-        charArrayNumVector(i) = cipher(cipherKey(i),wordToNum(i));
+    if (space)
+        charArray = [''];
+        countSpaces = 0;
+        for i = 1:length(wordToNum)
+            if (mod(i,6) == 0)
+                charArray(i + countSpaces) = ' ';
+                countSpaces = countSpaces + 1;
+            end
+            
+            charArray(i + countSpaces) = cipher(cipherKey(i),wordToNum(i));
+        end
+    else
+        charArray = [''];
+        for i = 1:length(wordToNum)
+            charArray(i) = cipher(cipherKey(i),wordToNum(i));
+        end
     end
     
     
-    
-    charArray = charArrayNumVector;
       
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     function wordToNum = lettToNum(word)
         %Make word a string of numbers
