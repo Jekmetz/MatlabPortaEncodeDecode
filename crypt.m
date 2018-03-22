@@ -19,6 +19,9 @@ function charArray = crypt(word,key,space)
               'yznopqrstuvwxcdefghijklmab';...
               'znopqrstuvwxybcdefghijklma'];
     
+    word = lower(word);
+    word = regexprep(word,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','')
+    key = lower(key);
     %Make the key a repeated thing      
     newKey = [''];
     for i = 1:length(word)
