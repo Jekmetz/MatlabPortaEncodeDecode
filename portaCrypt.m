@@ -1,4 +1,4 @@
-function charArray = crypt(word,key,space)
+function charArray = portaCrypt(word,key,space)
 %%This function takes a word, a key, and a boolean and encrypts or decrypts them. Since
 %%the porta cipher uses the exact same method to encode and decode, the
 %%command can be run on the encrypted word with the same key to decrypt it.
