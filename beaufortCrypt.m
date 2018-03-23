@@ -46,7 +46,6 @@ function charArray = beaufortCrypt(word,key,spaces)
     end
 
     wordToNum = lettToNum(word);
-    keyToNum = lettToNum(newKey);
 
     if (spaces)
         charArray = '';
@@ -58,7 +57,7 @@ function charArray = beaufortCrypt(word,key,spaces)
             end
 
             for j = 1:26
-                if (cipher(j,keyToNum(i)) == word(i))
+                if (cipher(j,wordToNum(i)) == newKey(i))
                     charArray(i + countSpaces) = cipher(j,1);
                 end
             end
@@ -68,7 +67,7 @@ function charArray = beaufortCrypt(word,key,spaces)
         charArray = '';
         for i = 1:length(wordToNum)
             for j = 1:26
-                if (cipher(j,keyToNum(i)) == word(i))
+                if (cipher(j,wordToNum(i)) == newKey(i))
                     charArray(i) = cipher(j,1);
                 end
             end
