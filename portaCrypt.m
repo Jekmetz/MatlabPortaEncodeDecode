@@ -1,8 +1,8 @@
 function charArray = portaCrypt(word,key,space)
-%%This function takes a word, a key, and a boolean and encrypts or decrypts them. Since
-%%the porta cipher uses the exact same method to encode and decode, the
-%%command can be run on the encrypted word with the same key to decrypt it.
-%%If you want to separate the thing into spaces, put 1, if not put 0.
+%This function takes a word, a key, and a boolean and encrypts or decrypts them. Since
+%the porta cipher uses the exact same method to encode and decode, the
+%command can be run on the encrypted word with the same key to decrypt it.
+%If you want to separate the thing into spaces, put 1, if not put 0.
 
     %Initialize the independant variables
     cipher = ['nopqrstuvwxyzabcdefghijklm';...
@@ -20,7 +20,7 @@ function charArray = portaCrypt(word,key,space)
               'znopqrstuvwxybcdefghijklma'];
     
     word = lower(word);
-    word = regexprep(word,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','')
+    word = regexprep(word,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','');
     key = lower(key);
     %Make the key a repeated thing      
     newKey = [''];
