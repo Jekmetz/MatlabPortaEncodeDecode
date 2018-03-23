@@ -1,8 +1,8 @@
 function charArray = portaCrypt(word,key,space)
-%%This function takes a word, a key, and a boolean and encrypts or decrypts them. Since
-%%the porta cipher uses the exact same method to encode and decode, the
-%%command can be run on the encrypted word with the same key to decrypt it.
-%%If you want to separate the thing into spaces, put 1, if not put 0.
+%This function takes a word, a key, and a boolean and encrypts or decrypts them. Since
+%the porta cipher uses the exact same method to encode and decode, the
+%command can be run on the encrypted word with the same key to decrypt it.
+%If you want to separate the thing into spaces, put 1, if not put 0.
 
     %Initialize the independant variables
     cipher = ['nopqrstuvwxyzabcdefghijklm';...
@@ -20,10 +20,12 @@ function charArray = portaCrypt(word,key,space)
               'znopqrstuvwxybcdefghijklma'];
     
     word = lower(word);
-    word = regexprep(word,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','')
+    word = regexprep(word,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','');
     key = lower(key);
+    key = regexprep(key,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','');
+    
     %Make the key a repeated thing      
-    newKey = [''];
+    newKey = '';
     for i = 1:length(word)
         newKey(i) = key(mod(i-1,length(key))+1);
     end
@@ -38,7 +40,7 @@ function charArray = portaCrypt(word,key,space)
     
     %%lets convert some Strings!
     if (space)
-        charArray = [''];
+        charArray = '';
         countSpaces = 0;
         for i = 1:length(wordToNum)
             if (mod(i,6) == 0)
@@ -49,18 +51,15 @@ function charArray = portaCrypt(word,key,space)
             charArray(i + countSpaces) = cipher(cipherKey(i),wordToNum(i));
         end
     else
-        charArray = [''];
+        charArray = '';
         for i = 1:length(wordToNum)
             charArray(i) = cipher(cipherKey(i),wordToNum(i));
         end
     end
     
-    
-      
-    
     function wordToNum = lettToNum(word)
-        %Make word a string of numbers
-        alphaNum = ['abcdefghijklmnopqrstuvwxyz'];
+        %Make word a string of numbers. a -> 1, z ->26
+        alphaNum = 'abcdefghijklmnopqrstuvwxyz';
         wordToNum = zeros(1,length(word));
         
         for i = 1:length(word)
