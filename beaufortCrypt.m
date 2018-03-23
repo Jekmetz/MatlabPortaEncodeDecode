@@ -34,36 +34,42 @@ function charArray = beaufortCrypt(word,key,spaces)
 
     alphaNum = upper('abcdefghijklmnopqrstuvwxyz');
 
+    %Initialize the word and the key
     word = upper(word);
     word = regexprep(word,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','');
     key = upper(key);
     key = regexprep(key,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','');
 
-
+    %repeat the key to match the length of the word
     newKey = '';
     for i = 1:length(word)
         newKey(i) = key(mod(i-1,length(key))+1);
     end
-
+    
+    %Make the letters a numerical value from 1-26 to use as a column number
+    %for the cipher
     wordToNum = lettToNum(word);
-
+    
+    %Lets generate some encryption/decryption!
     if (spaces)
-        charArray = '';
-        countSpaces = 0;
+        charArray = '';     %initialize charArray as a character array
+        countSpaces = 0;    %initialize countSpaces to 0
         for i = 1:length(wordToNum)
-            if (mod(i-1,5)+1 == 1)
-                charArray(i + countSpaces) = ' ';
-                countSpaces = countSpaces + 1;
+            if ((mod(i-1,5)+1 == 1) && (i > 1))     %for every fifth letter, put a space there
+                charArray(i + countSpaces) = ' ';   %add the space
+                countSpaces = countSpaces + 1;      %increment countSpaces by one
             end
 
-            for j = 1:26
-                if (cipher(j,wordToNum(i)) == newKey(i))
-                    charArray(i + countSpaces) = cipher(j,1);
+            for j = 1:26                            %26 letters in the alphabet
+                if (cipher(j,wordToNum(i)) == newKey(i))    %search through the column defined by the letter position of wordToNum(i)
+                    charArray(i + countSpaces) = cipher(j,1);       %set the next letter as the letter that is on the alphabet. Using the fact that row 1 col 1 is a and row 1 col 26 is z. Simplifying code
                 end
             end
 
         end
     else
+        %Everything is the same here except for counting spaces so look
+        %above
         charArray = '';
         for i = 1:length(wordToNum)
             for j = 1:26
@@ -78,19 +84,17 @@ function charArray = beaufortCrypt(word,key,spaces)
 
 
     function wordToNum = lettToNum(word)
-        %Make word a string of numbers
-        wordToNum = zeros(1,length(word));
+    %Make word a string of numbers. a -> 1, z -> 26
+    
+        wordToNum = zeros(1,length(word));      %Initialize wordToNum for efficiency
         
-        for i = 1:length(word)
-            for j = 1:26
-                if ( word(i) == alphaNum(j) )
-                    wordToNum(i) = j;
+        for i = 1:length(word)                  %For how big the word is
+            for j = 1:26                        %For how big the alphabet is
+                if ( word(i) == alphaNum(j) )   %if the letter is == to the a letter in alphaNum
+                    wordToNum(i) = j;           %set it to that value. line 35 is alphaNum
                 end
             end
         end
     end
 
-    function lett = numToLett(num)
-        lett = alphaNum(num);
-    end
 end

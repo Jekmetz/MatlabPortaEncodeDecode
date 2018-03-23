@@ -23,6 +23,7 @@ function charArray = portaCrypt(word,key,space)
     word = regexprep(word,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','');
     key = lower(key);
     key = regexprep(key,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','');
+    
     %Make the key a repeated thing      
     newKey = '';
     for i = 1:length(word)
@@ -56,11 +57,8 @@ function charArray = portaCrypt(word,key,space)
         end
     end
     
-    
-      
-    
     function wordToNum = lettToNum(word)
-        %Make word a string of numbers
+        %Make word a string of numbers. a -> 1, z ->26
         alphaNum = 'abcdefghijklmnopqrstuvwxyz';
         wordToNum = zeros(1,length(word));
         
