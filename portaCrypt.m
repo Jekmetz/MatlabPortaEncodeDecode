@@ -22,8 +22,9 @@ function charArray = portaCrypt(word,key,space)
     word = lower(word);
     word = regexprep(word,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','');
     key = lower(key);
+    key = regexprep(key,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','');
     %Make the key a repeated thing      
-    newKey = [''];
+    newKey = '';
     for i = 1:length(word)
         newKey(i) = key(mod(i-1,length(key))+1);
     end
@@ -38,7 +39,7 @@ function charArray = portaCrypt(word,key,space)
     
     %%lets convert some Strings!
     if (space)
-        charArray = [''];
+        charArray = '';
         countSpaces = 0;
         for i = 1:length(wordToNum)
             if (mod(i,6) == 0)
@@ -49,7 +50,7 @@ function charArray = portaCrypt(word,key,space)
             charArray(i + countSpaces) = cipher(cipherKey(i),wordToNum(i));
         end
     else
-        charArray = [''];
+        charArray = '';
         for i = 1:length(wordToNum)
             charArray(i) = cipher(cipherKey(i),wordToNum(i));
         end
@@ -60,7 +61,7 @@ function charArray = portaCrypt(word,key,space)
     
     function wordToNum = lettToNum(word)
         %Make word a string of numbers
-        alphaNum = ['abcdefghijklmnopqrstuvwxyz'];
+        alphaNum = 'abcdefghijklmnopqrstuvwxyz';
         wordToNum = zeros(1,length(word));
         
         for i = 1:length(word)
