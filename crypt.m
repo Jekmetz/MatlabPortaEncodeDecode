@@ -8,12 +8,12 @@ while(stay)
     switch(whichCipher)
         case 'porta'
             alphaNum = 'abcdefghijklmnopqrstuvwxyz';
-            charArray = portaCrypt(word,key,spaces);
+            charVec = portaCrypt(word,key);
             stay = 0;
             
         case 'beaufort'
             alphaNum = upper('abcdefghijklmnopqrstuvwxyz');
-            charArray = beufortCrypt(word,key,spaces);
+            charVec = beaufortCrypt(word,key);
             stay = 0;
             
         case 'auto'
@@ -26,10 +26,28 @@ while(stay)
     end
 end
 
+%Put spaces in the charVec if needed
+if (spaces)
+    charArray = '';
+    countSpaces = 0;
+    for i = 1:length(charVec)
+        if (mod(i,5) == 0)
+                charArray(i + countSpaces) = ' ';
+                charArray(i + countSpaces) = charVec(i);
+                countSpaces = countSpaces + 1;
+        else
+            charArray(i + countSpaces) = charVec(i);
+        end
+    end
+else
+    charArray = charVec;
+end
+
+
 %Here are all of the functions
 
 %portaCrypt
-    function charArray = portaCrypt(word,key,space)
+    function charArray = portaCrypt(word,key)
         %This function takes a word, a key, and a boolean and encrypts or decrypts them. Since
         %the porta cipher uses the exact same method to encode and decode, the
         %command can be run on the encrypted word with the same key to decrypt it.
@@ -70,27 +88,14 @@ end
         cipherKey = ceil(keyToNum/2);
         
         %%lets convert some Strings!
-        if (space)
-            charArray = '';
-            countSpaces = 0;
-            for i = 1:length(wordToNum)
-                if (mod(i,6) == 0)
-                    charArray(i + countSpaces) = ' ';
-                    countSpaces = countSpaces + 1;
-                end
-                
-                charArray(i + countSpaces) = cipher(cipherKey(i),wordToNum(i));
-            end
-        else
-            charArray = '';
-            for i = 1:length(wordToNum)
-                charArray(i) = cipher(cipherKey(i),wordToNum(i));
-            end
+        charArray = '';
+        for i = 1:length(wordToNum)
+            charArray(i) = cipher(cipherKey(i),wordToNum(i));
         end
     end
 
 %beaufort Crypt
-    function charArray = beaufortCrypt(word,key,spaces)
+    function charArray = beaufortCrypt(word,key)
         %This function takes a word, a key, and a boolean and encodes it using the
         %beaufort cipher. The encryption and decryption processes are exactly the
         %same. If you want to separate it with spaces, put 1 for the spaces
@@ -143,31 +148,14 @@ end
         wordToNum = lettToNum(word);
         
         %Lets generate some encryption/decryption!
-        if (spaces)
-            charArray = '';     %initialize charArray as a character array
-            countSpaces = 0;    %initialize countSpaces to 0
-            for i = 1:length(wordToNum)
-                if ((mod(i-1,5)+1 == 1) && (i > 1))     %for every fifth letter, put a space there
-                    charArray(i + countSpaces) = ' ';   %add the space
-                    countSpaces = countSpaces + 1;      %increment countSpaces by one
-                end
-                
-                for j = 1:26                            %26 letters in the alphabet
-                    if (cipher(j,wordToNum(i)) == newKey(i))    %search through the column defined by the letter position of wordToNum(i)
-                        charArray(i + countSpaces) = cipher(j,1);       %set the next letter as the letter that is on the alphabet. Using the fact that row 1 col 1 is a and row 1 col 26 is z. Simplifying code
-                    end
-                end
-                
-            end
-        else
-            %Everything is the same here except for counting spaces so look
-            %above
-            charArray = '';
-            for i = 1:length(wordToNum)
-                for j = 1:26
-                    if (cipher(j,wordToNum(i)) == newKey(i))
-                        charArray(i) = cipher(j,1);
-                    end
+        
+        %Everything is the same here except for counting spaces so look
+        %above
+        charArray = '';
+        for i = 1:length(wordToNum)
+            for j = 1:26
+                if (cipher(j,wordToNum(i)) == newKey(i))
+                    charArray(i) = cipher(j,1);
                 end
             end
         end
