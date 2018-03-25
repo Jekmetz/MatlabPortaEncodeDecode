@@ -31,9 +31,10 @@ function charArray = beaufortCrypt(word,key,spaces)
               'XYZABCDEFGHIJKLMNOPQRSTUVW';...
               'YZABCDEFGHIJKLMNOPQRSTUVWX';...
               'ZABCDEFGHIJKLMNOPQRSTUVWXY'];
-
+          
     alphaNum = upper('abcdefghijklmnopqrstuvwxyz');
 
+    
     %Initialize the word and the key
     word = upper(word);
     word = regexprep(word,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]','');
@@ -85,7 +86,7 @@ function charArray = beaufortCrypt(word,key,spaces)
 
     function wordToNum = lettToNum(word)
     %Make word a string of numbers. a -> 1, z -> 26
-    
+        
         wordToNum = zeros(1,length(word));      %Initialize wordToNum for efficiency
         
         for i = 1:length(word)                  %For how big the word is
