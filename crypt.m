@@ -1,7 +1,5 @@
-function charArray = crypt(word,key,spaces)
-%Encrypts or decrypts a word with a certain key. syntax crypt(<word to encrypt>,<any memorable string of letters>,<1 for spaces, 0 for no spaces>)
-
-whichCipher = input('What kind of cipher would you like to use?\n(Please type ''porta'',''beaufort'',''auto'', We will put the rest here: ','s');
+function charArray = crypt(word,key,whichCipher,spaces)
+%Encrypts or decrypts a word with a certain key. syntax crypt(<word to encrypt>,<any memorable string of letters>,<which cipher you want>,<1 for spaces, 0 for no spaces>)
 
 stay = 1;
 while(stay)
