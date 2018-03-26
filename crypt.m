@@ -1,5 +1,6 @@
 function charArray = crypt(word,key,whichCipher,spaces)
 %Encrypts or decrypts a word with a certain key. syntax crypt(<word to encrypt>,<any memorable string of letters>,<which cipher you want>,<1 for spaces, 0 for no spaces>)
+%This does a thing
 
 stay = 1;
 while(stay)

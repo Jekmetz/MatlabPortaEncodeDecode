@@ -70,5 +70,4 @@ function charArray = portaCrypt(word,key,space)
             end
         end 
     end
-
 end
