@@ -78,10 +78,10 @@ end
         wordToNum = lettToNum(word);
         keyToNum = lettToNum(newKey);
         
-        %%convert the key numbers to the row number they correspond to
+        %convert the key numbers to the row number they correspond to
         cipherKey = ceil(keyToNum/2);
         
-        %%lets convert some Strings!
+        %lets convert some Strings!
         charArray = '';
         for i = 1:length(wordToNum)
             charArray(i) = cipher(cipherKey(i),wordToNum(i));
@@ -150,6 +150,7 @@ end
             for j = 1:26
                 if (cipher(j,wordToNum(i)) == newKey(i))
                     charArray(i) = cipher(j,1);
+                    break;
                 end
             end
         end
