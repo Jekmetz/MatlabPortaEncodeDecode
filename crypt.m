@@ -198,6 +198,7 @@ end
                   'ZABCDEFGHIJKLMNOPQRSTUVWXY'];
 
         HideText = upper(regexprep(HideText,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]',''));
+        KeyWord = upper(regexprep(KeyWord,'[ ~!@#$%^&*()_\+\-\=`1234567890{}\[\]\\|:;"''<,>.?\/]',''));
         encrypted = '';
         switch(method)
             case 'd'
@@ -252,9 +253,9 @@ end
 
         %Using the key and the word
         message=upper(message);
-        message=regexprep(message,'[!-@#$%^&*()_\+-*=1234567890[]{},./<>?;":|`~]','');
+        message=regexprep(message,'[ !-@#$%^&*()_\+-*=1234567890[]{},./<>?;":|`~]','');
         keyword=upper(keyword);
-        keyword=regexprep(keyword,'[!-@#$%^&*()_\+-*=1234567890[]{},./<>?;":|`~]','');
+        keyword=regexprep(keyword,'[ !-@#$%^&*()_\+-*=1234567890[]{},./<>?;":|`~]','');
 
         message=upper(message);
         keyword=upper(keyword);
